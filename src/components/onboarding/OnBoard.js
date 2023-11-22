@@ -23,7 +23,22 @@ const OnBoard = () => {
     <main id="onboard">
       <section className="wrapper">
         <div id="slider" />
-        <div id="button" />
+        <div id="button-box">
+          <button
+            type="button"
+            className="dark"
+            onClick={() => dispatch(updatePageType('signup'))}
+          >
+            Sign Up
+          </button>
+          <button
+            type="button"
+            className="light"
+            onClick={() => dispatch(updatePageType('signin'))}
+          >
+            Sign In
+          </button>
+        </div>
       </section>
     </main>
   );

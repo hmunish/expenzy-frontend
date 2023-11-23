@@ -22,7 +22,16 @@ const OnBoard = () => {
   return (
     <main id="onboard">
       <section className="wrapper">
-        <div id="slider" />
+        <div id="slider">
+          <div className="slider-image-wrapper" />
+          <div className="slider-content-wrapper">
+            <h1 className="title-1">
+              Gain total control
+              of your money
+            </h1>
+            <p className="descp-1">Become your own money manager and make every cent count</p>
+          </div>
+        </div>
         <div id="button-box">
           <button
             type="button"

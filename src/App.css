@@ -32,13 +32,13 @@ button.light {
 }
 
 main {
-  max-width: 100vw;
-  width: 360px;
+  width: 100vw;
+  max-width: 600px;
   height: 100vh;
-
-  /* min-height: 812px; */
+  min-height: 600px;
+  max-height: 812px;
   margin: auto;
-  border: 1px solid;
+  /* border: 1px solid; */
 }
 
 /* Navbar starts here */
@@ -81,13 +81,45 @@ nav > h1 {
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  background-color: cadetblue;
 }
 
 #onboard #slider {
   width: 91%;
   height: 77%;
-  background-color: brown;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.slider-image-wrapper {
+  width: 100%;
+  height: 59%;
+  background-image: url("./components//assets/slide-1.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.slider-content-wrapper{
+  width: 89%;
+  height: 25%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 15%;
+  text-align: center;
+}
+
+.title-1{
+  font-size: 1.9rem;
+  font-weight: 1000;
+  color: var(--dark-clr-1);
+}
+
+.descp-1{
+  font-size: 1rem;
+  color: var(--light-clr-2);
 }
 
 #onboard #button-box {
@@ -97,7 +129,6 @@ nav > h1 {
   flex-direction: column;
   justify-content: space-between;
   gap: 16px;
-  background-color: chocolate;
 }
 
 button.dark,
@@ -119,7 +150,7 @@ section.signin {
   width: 91%;
   height: 60%;
   margin: auto;
-  margin-top: 20%;
+  margin-top: 11%;
 
   /* background-color: #837b92; */
 }

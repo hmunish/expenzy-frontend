@@ -1,16 +1,23 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { signup, updatePageType } from '../../redux/onboard/onboardSlice';
+import { signin, signup, updatePageType } from '../../redux/onboard/onboardSlice';
 import Navbar from '../common/Navbar';
 import googleImg from '../assets/google.png';
 import Notification from '../common/Notification';
+import { updateAuthorization } from '../../redux/user/userSlice';
 
 const SignUp = () => {
   const onboard = useSelector((state) => state.onboard);
   const dispatch = useDispatch();
 
-  const handlerSignUp = (e) => {
+  const handlerSignUp = async (e) => {
     e.preventDefault();
-    dispatch(signup({ email: e.target.email.value, password: e.target.password.value }));
+    const email = e.target.email.value;
+    const password = e.target.password.value;
+    const isSignUp = await dispatch(signup({ email, password }));
+    if (isSignUp.error) return;
+    const response = await dispatch(signin({ email, password }));
+    if (!response.payload.authorization) return;
+    dispatch(updateAuthorization(response.payload.authorization));
   };
 
   return (

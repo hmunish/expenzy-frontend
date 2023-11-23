@@ -2,7 +2,7 @@ import { useSelector } from 'react-redux';
 import './App.css';
 import { Route, Routes } from 'react-router-dom';
 import OnBoard from './components/onboarding/OnBoard';
-import Welcome from './components/dashboard/Welcome';
+import Dashboard from './components/dashboard/Dashboard';
 
 function App() {
   const user = useSelector((state) => state.user);
@@ -12,7 +12,7 @@ function App() {
   return (
     <main>
       <Routes>
-        <Route path="/*" element={<Welcome />} />
+        <Route path="/*" element={<Dashboard />} />
       </Routes>
     </main>
   );

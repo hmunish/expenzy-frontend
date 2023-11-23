@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { API_URL } from '../../utility/config';
-import { getLocalStorageAuthToken } from '../../utility/helper';
+import { getLocalStorageAuthToken, setLocalStorageAuthToken } from '../../utility/helper';
 
 const initialState = {
   isLoading: false,
@@ -29,6 +29,16 @@ export const authorizeUser = createAsyncThunk(
 const userSlice = createSlice({
   name: 'userSlice',
   initialState,
+  reducers: {
+    updateAuthorization(state, action) {
+      state.isLoading = false;
+      state.isError = null;
+      state.isAuthorized = true;
+      state.userAuthToken = action.payload;
+      axios.defaults.headers.common.Authorization = state.userAuthToken;
+      setLocalStorageAuthToken(state.userAuthToken);
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(authorizeUser.fulfilled, (state, action) => {
       state.isLoading = false;
@@ -47,4 +57,5 @@ const userSlice = createSlice({
   },
 });
 
+export const { updateAuthorization } = userSlice.actions;
 export default userSlice.reducer;

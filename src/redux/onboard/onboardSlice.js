@@ -45,6 +45,39 @@ export const signup = createAsyncThunk('onboard/signup', async ({ email, passwor
   }
 });
 
+export const signin = createAsyncThunk('onboard/signin', async ({ email, password }, thunkAPI) => {
+  try {
+    const sanitizedEmail = sanitize(email);
+    const sanitizedPassword = sanitize(password);
+
+    // Validating if required fields exists & are not empty
+    if (!sanitizedEmail || !sanitizedPassword) {
+      throw new Error('Empty fields. Email & Password both required');
+    }
+
+    // Validating required fields are in correct & required format
+    const errorMessage = [];
+    if (!validator.isEmail(sanitizedEmail)) errorMessage.push('Invalid EmailId');
+    if (!validator.isStrongPassword(sanitizedPassword)) {
+      errorMessage.push('Invalid Password');
+    }
+
+    // If any error exists throwing new error with custom message
+    if (errorMessage.length) throw new Error(errorMessage.join(', '));
+
+    // Making request to create new user
+    const response = await axios.post(`${API_URL}/user/signin`, { email: sanitizedEmail, password: sanitizedPassword });
+
+    // Confirming if response code is 200(OK) else throwing error
+    if (response.status !== 200) throw new Error('Error signing in the user');
+
+    // Resolving the function with success value
+    return thunkAPI.fulfillWithValue(response.data);
+  } catch (error) {
+    return thunkAPI.rejectWithValue(error.response?.data.message || error.message);
+  }
+});
+
 const onboardSlice = createSlice({
   name: 'onboardSlice',
   initialState,
@@ -66,6 +99,21 @@ const onboardSlice = createSlice({
     });
     builder.addCase(signup.rejected, (state, action) => {
       state.isSignUp = false;
+      state.isLoading = false;
+      state.isError = action.payload;
+    });
+    builder.addCase(signin.fulfilled, (state) => {
+      state.isLoading = false;
+      state.isError = null;
+      state.isSignIn = true;
+    });
+    builder.addCase(signin.pending, (state) => {
+      state.isSignIn = false;
+      state.isLoading = true;
+      state.isError = null;
+    });
+    builder.addCase(signin.rejected, (state, action) => {
+      state.isSignIn = false;
       state.isLoading = false;
       state.isError = action.payload;
     });

@@ -31,6 +31,23 @@ button.light {
   color: var(--primary-clr);
 }
 
+div.notification {
+  padding: 5px;
+  color: #fff;
+}
+
+div.notification.error {
+  background-color: rgb(241, 85, 85);
+}
+
+div.notification.loading {
+  background-color: lightblue;
+}
+
+div.notification.success {
+  background-color: lightgreen;
+}
+
 main {
   width: 100vw;
   max-width: 600px;
@@ -38,6 +55,7 @@ main {
   min-height: 600px;
   max-height: 812px;
   margin: auto;
+
   /* border: 1px solid; */
 }
 
@@ -101,7 +119,7 @@ nav > h1 {
   background-position: center;
 }
 
-.slider-content-wrapper{
+.slider-content-wrapper {
   width: 89%;
   height: 25%;
   display: flex;
@@ -111,13 +129,13 @@ nav > h1 {
   text-align: center;
 }
 
-.title-1{
+.title-1 {
   font-size: 1.9rem;
   font-weight: 1000;
   color: var(--dark-clr-1);
 }
 
-.descp-1{
+.descp-1 {
   font-size: 1rem;
   color: var(--light-clr-2);
 }

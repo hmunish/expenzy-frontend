@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { signin, updatePageType } from '../../redux/onboard/onboardSlice';
-import Navbar from '../common/Navbar';
+import TopBar from '../common/TopBar';
 import Notification from '../common/Notification';
 import { updateAuthorization } from '../../redux/user/userSlice';
 
@@ -22,7 +22,7 @@ const SignIn = () => {
       {onboard.isLoading && <Notification message="Signing In..." type="loading" />}
       {onboard.isError && <Notification message={onboard.isError} type="error" />}
       {onboard.isSignIn && <Notification message="Signed In successfully. Redirecting..." type="success" />}
-      <Navbar text="Sign In" clickHandler={() => { dispatch(updatePageType('onboard')); }} />
+      <TopBar text="Sign In" clickHandler={() => { dispatch(updatePageType('onboard')); }} />
       <section className="signin">
         <form className="signin" onSubmit={handlerSignIn}>
           <input type="email" placeholder="Email" name="email" required />

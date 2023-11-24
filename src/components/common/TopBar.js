@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
 
-const Navbar = ({ text, clickHandler }) => {
+const TopBar = ({ text, clickHandler }) => {
   const navigate = useNavigate();
   return (
     <nav>
@@ -13,14 +13,14 @@ const Navbar = ({ text, clickHandler }) => {
   );
 };
 
-Navbar.defaultProps = {
+TopBar.defaultProps = {
   text: '',
   clickHandler: null,
 };
 
-Navbar.propTypes = {
+TopBar.propTypes = {
   text: PropTypes.string,
   clickHandler: PropTypes.func,
 };
 
-export default Navbar;
+export default TopBar;

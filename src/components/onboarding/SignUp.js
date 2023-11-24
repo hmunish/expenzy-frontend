@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { signin, signup, updatePageType } from '../../redux/onboard/onboardSlice';
-import Navbar from '../common/Navbar';
+import TopBar from '../common/TopBar';
 import googleImg from '../assets/google.png';
 import Notification from '../common/Notification';
 import { updateAuthorization } from '../../redux/user/userSlice';
@@ -25,7 +25,7 @@ const SignUp = () => {
       {onboard.isLoading && <Notification message="Signing Up..." type="loading" />}
       {onboard.isError && <Notification message={onboard.isError} type="error" />}
       {onboard.isSignUp && <Notification message="Signed up successfully" type="success" />}
-      <Navbar text="Sign Up" clickHandler={() => { dispatch(updatePageType('onboard')); }} />
+      <TopBar text="Sign Up" clickHandler={() => { dispatch(updatePageType('onboard')); }} />
       <section className="signup">
         <form className="signup" onSubmit={handlerSignUp}>
           <input type="email" placeholder="Email" name="email" required />

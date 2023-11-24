@@ -7,6 +7,7 @@
   --text-clr-4: #767474;
   --light-clr-1: #f1f1fa;
   --light-clr-2: #91919f;
+  --light-clr-3: #c6c6c6;
   --bg-clr-1: #a89696;
   --bg-clr-2: #fff6e5;
   --bg-clr-3: #00a86b;
@@ -69,7 +70,7 @@ main {
 }
 
 /* Navbar starts here */
-nav {
+#topbar {
   width: 90%;
   height: 7%;
   margin: auto;
@@ -86,7 +87,7 @@ button.back {
   background: none;
 }
 
-nav > h1 {
+#tbr-title {
   font-size: 18px;
   font-weight: 700;
   text-align: center;
@@ -456,7 +457,40 @@ a.rts-link {
 #navigation {
   width: 100%;
   height: 9%;
-  background: #eee5ff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--text-clr-1);
+}
+
+#nav-wrp {
+  width: 89%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.nav-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 12px;
+  text-decoration: none;
+  color: var(--light-clr-3);
+}
+
+.nav-btn.active,
+#add-trnsc {
+  color: var(--primary-clr);
+}
+
+.nav-btn > svg {
+  font-size: 25px;
+}
+
+#add-trnsc > svg {
+  position: absolute;
+  font-size: 55px !important;
+  margin-top: -15px;
 }
 
 /* Dashboard ends here */

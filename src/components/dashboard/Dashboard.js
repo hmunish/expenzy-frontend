@@ -3,6 +3,7 @@ import incomeImg from '../assets/income.png';
 import expenseImg from '../assets/expense.png';
 import incomingImg from '../assets/incoming.png';
 import outgoingImg from '../assets/outgoing.png';
+import Navigation from '../common/Navigation';
 
 const Dashboard = () => (
   <main id="dashboard">
@@ -66,7 +67,7 @@ const Dashboard = () => (
         <div className="transaction" />
       </div>
     </div>
-    <div id="navigation" />
+    <Navigation />
   </main>
 );
 

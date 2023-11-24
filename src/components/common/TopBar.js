@@ -4,11 +4,11 @@ import { useNavigate } from 'react-router-dom';
 const TopBar = ({ text, clickHandler }) => {
   const navigate = useNavigate();
   return (
-    <nav>
+    <nav id="topbar">
       <button className="back" type="button" onClick={clickHandler || (() => navigate(-1))}>
         &larr;
       </button>
-      <h1>{text}</h1>
+      <h1 id="tbr-title">{text}</h1>
     </nav>
   );
 };

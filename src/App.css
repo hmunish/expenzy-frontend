@@ -1,3 +1,14 @@
+::-webkit-scrollbar {
+  width: 2px;
+  background: none;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--primary-clr);
+  height: 15px;
+  border-radius: 5px;
+}
+
 :root {
   --primary-clr: #7f3dff;
   --secondary-clr: #eee5ff;
@@ -73,7 +84,7 @@ main {
 #topbar {
   width: 90%;
   height: 7%;
-  margin: auto;
+  margin: 0 auto;
   display: grid;
   grid-template-columns: 1fr 3fr 1fr;
   align-items: center;
@@ -489,8 +500,86 @@ a.rts-link {
 
 #add-trnsc > svg {
   position: absolute;
-  font-size: 55px !important;
-  margin-top: -15px;
+  font-size: 45px !important;
+  margin-top: -5px;
 }
+
+/* Transaction lists starts here */
+.bg-light {
+  background: linear-gradient(var(--bg-clr-2, #fff));
+}
+
+#transaction-list {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+div.trc-filter {
+  width: 100%;
+  height: 7%;
+  display: flex;
+  align-items: center;
+  gap: 3%;
+  padding-left: 8px;
+  font-size: 14px;
+  color: var(--dark-clr-1);
+}
+
+select.trc-filter {
+  border-radius: 40px;
+  background: none;
+  padding: 8px;
+}
+
+ul.trc-list {
+  height: 79%;
+  width: 100%;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3%;
+  overflow-y: scroll;
+}
+
+li.trc-list {
+  width: 95%;
+  min-height: 15%;
+  border-radius: 24px;
+  background-color: var(--text-clr-1);
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  padding: 15px;
+}
+
+.trc-cat,
+.trc-amt {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--dark-clr-1);
+}
+
+.trc-descp,
+.trc-time {
+  font-size: 13px;
+  color: var(--light-clr-2);
+}
+
+.trc-amt,
+.trc-time {
+  text-align: right;
+}
+
+.inc-clr {
+  color: var(--bg-clr-3);
+}
+
+.exp-clr {
+  color: var(--bg-clr-4);
+}
+
+/* Transaction lists ends here */
 
 /* Dashboard ends here */

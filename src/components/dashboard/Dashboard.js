@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import dp from '../assets/dp.png';
 import incomeImg from '../assets/income.png';
 import expenseImg from '../assets/expense.png';
@@ -47,7 +48,7 @@ const Dashboard = () => (
     <div id="recent-transactions-box">
       <div className="rts-link">
         <p className="rts-link">Recent Transactions</p>
-        <p className="rts-link"><a href="/transactions" className="rts-link">View All</a></p>
+        <p className="rts-link"><Link to="/transactions" className="rts-link">View All</Link></p>
       </div>
       <div id="transactions-wrp">
         <div className="transaction">

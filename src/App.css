@@ -582,4 +582,66 @@ li.trc-list {
 
 /* Transaction lists ends here */
 
+/* Profile starts here */
+section.profile {
+  width: 100%;
+  height: 100%;
+  padding-top: 3%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+div.profile-details {
+  width: 87%;
+  height: 10%;
+  display: flex;
+  align-items: center;
+  gap: 5%;
+}
+
+img.profile-details {
+  height: 100%;
+}
+
+p.profile-details {
+  font-size: 14px;
+  color: var(--light-clr-2);
+}
+
+span.profile-details{
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--text-clr-3);
+}
+
+#profile-options{
+  width: 93%;
+  height: 45%;
+  border-radius: 24px;
+}
+
+.profile-option{
+  width: 100%;
+  height: 25%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+#profile-option-wrp{
+  width: 90%;
+  height: 67%;
+  display: flex;
+  align-items: center;
+  gap: 5%;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--dark-clr-1);
+}
+
+/* Profile ends here */
+
 /* Dashboard ends here */

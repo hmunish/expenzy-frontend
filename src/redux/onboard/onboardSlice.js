@@ -85,6 +85,7 @@ const onboardSlice = createSlice({
     updatePageType(state, action) {
       state.pageType = action.payload;
     },
+    resetState: () => initialState,
   },
   extraReducers: (builder) => {
     builder.addCase(signup.fulfilled, (state) => {
@@ -120,5 +121,5 @@ const onboardSlice = createSlice({
   },
 });
 
-export const { updatePageType } = onboardSlice.actions;
+export const { updatePageType, resetState } = onboardSlice.actions;
 export default onboardSlice.reducer;

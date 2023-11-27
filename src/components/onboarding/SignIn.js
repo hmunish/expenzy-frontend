@@ -14,7 +14,8 @@ const SignIn = () => {
     const password = e.target.password.value;
     const response = await dispatch(signin({ email, password }));
     if (!response.payload.authorization) return;
-    dispatch(updateAuthorization(response.payload.authorization));
+    const { user, authorization } = response.payload;
+    dispatch(updateAuthorization({ user, authorization }));
   };
 
   return (

@@ -48,6 +48,12 @@ button.light {
   color: var(--primary-clr);
 }
 
+.flx-ctr {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .wh-100 {
   width: 100%;
   height: 100%;
@@ -60,6 +66,7 @@ button.light {
 div.notification {
   padding: 5px;
   color: #fff;
+  width: 100%;
 }
 
 div.notification.error {
@@ -358,7 +365,6 @@ div.form-other-options > p {
 
 .username {
   font-size: 14px;
-  text-transform: capitalize;
 }
 
 #dbd-balance-wrp {
@@ -664,7 +670,7 @@ form.add-transaction {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-around;
   margin: auto;
 }
 
@@ -694,6 +700,10 @@ button.trc-type {
   font-weight: bold;
 }
 
+button.trc-type.active {
+  transform: scale(1.2);
+}
+
 .trc-type.expense {
   background-color: var(--bg-clr-4);
 }
@@ -707,5 +717,146 @@ button.trc-type {
 }
 
 /* Add transaction ends here */
+
+/* Budget section starts here */
+
+section.budget {
+  display: flex;
+  flex-direction: column;
+  gap: 3%;
+}
+
+div.budget {
+  width: 100%;
+  height: 80%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+#budget-filter {
+  background-color: var(--light-clr-1);
+  border-radius: 32px;
+  padding: 5px;
+}
+
+div.budget-pi-graph {
+  width: 100%;
+  height: 47%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+
+#pi-graph {
+  width: 192px;
+  height: 192px;
+  background-image: conic-gradient(orange 64%, blue 64%, blue 81%, black 81%);
+  background-position: center;
+  border-radius: 50%;
+}
+
+div.budget-bar-graph {
+  width: 100%;
+  height: 46%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+div.budget-bar-graph-toggle {
+  width: 100%;
+  height: 20%;
+  background-color: var(--light-clr-1);
+  border-radius: 32px;
+}
+
+#budget-bar-graph-toggle-wrap {
+  width: 97%;
+  height: 81%;
+  position: relative;
+}
+
+button.budget-bar-graph-toggle {
+  width: 50%;
+  height: 100%;
+  border-radius: 32px;
+  border: none;
+  background: none;
+  color: var(--text-clr-3);
+  position: relative;
+  z-index: 5;
+}
+
+button.active-bar-toggle {
+  color: var(--light-clr-1);
+}
+
+#toggle-overlay {
+  position: absolute;
+  width: 50%;
+  height: 100%;
+  border-radius: 32px;
+  background-color: var(--bg-clr-4);
+}
+
+div.bar-graph {
+  width: 97%;
+  height: 67%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.bar {
+  width: 100%;
+  height: 25%;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  justify-content: space-between;
+  align-content: space-between;
+}
+
+.bar-tag {
+  width: 50%;
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  gap: 5%;
+  border-radius: 32px;
+  background-color: var(--light-clr-1);
+}
+
+.tag-cat {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.tag-circle {
+  width: 14px;
+  height: 14px;
+  background-color: #00a86b;
+  border-radius: 50%;
+}
+
+.bar-amt {
+  font-size: 24px;
+  font-weight: 600;
+  text-align: right;
+  color: var(--bg-clr-4);
+}
+
+.bar-progress {
+  width: 100%;
+  grid-column: 1 / 3;
+  accent-color: #c5ecde !important;
+}
+
+/* Budget section ends here */
+
 
 /* Dashboard ends here */

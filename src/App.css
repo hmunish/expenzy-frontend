@@ -526,6 +526,13 @@ a.rts-link {
   justify-content: space-between;
 }
 
+#show-more-transactions {
+  background: none;
+  border: none;
+  color: var(--bg-clr-4);
+  text-transform: uppercase;
+}
+
 div.trc-filter {
   width: 100%;
   height: 7%;

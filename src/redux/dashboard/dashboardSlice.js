@@ -7,9 +7,12 @@ const initialState = {
   isError: null,
   isSuccess: false,
   isUpdated: true,
+  isMoreTransactions: true,
   transactions: [],
   totalIncome: 0,
   totalExpense: 0,
+  page: 1,
+  limit: 5,
 };
 
 export const fetchTotals = createAsyncThunk('dashboard/fetchTotals', async (_, thunkAPI) => {
@@ -22,22 +25,20 @@ export const fetchTotals = createAsyncThunk('dashboard/fetchTotals', async (_, t
     }
     const response = await axios.get(`${API_URL}/expense/total`);
     if (response.status !== 200) throw new Error('Error fetching totals');
-    console.log(response);
     return thunkAPI.fulfillWithValue(response.data);
   } catch (error) {
     return thunkAPI.rejectWithValue(error.response?.data.message || error.message);
   }
 });
 
-export const fetchTransactions = createAsyncThunk('dashboard/fetchTransactions', async (n, thunkAPI) => {
+export const fetchTransactions = createAsyncThunk('dashboard/fetchTransactions', async (_, thunkAPI) => {
   try {
     const { dashboard } = thunkAPI.getState();
     // Checking if transactions are updated if false returning with previous transactions
     if (!dashboard.isUpdated) {
-      const { transactions } = dashboard;
-      return thunkAPI.fulfillWithValue(transactions);
+      return thunkAPI.fulfillWithValue('no value');
     }
-    const response = await axios.get(`${API_URL}/expense/?limit=${n}`);
+    const response = await axios.get(`${API_URL}/expense/?limit=${dashboard.limit}&page=${dashboard.page}`);
     if (response.status !== 200) throw new Error('Error fetching transactions');
     return thunkAPI.fulfillWithValue(response.data);
   } catch (error) {
@@ -93,7 +94,13 @@ const dashboardSlice = createSlice({
       state.isSuccess = true;
       state.isLoading = false;
       state.isError = null;
-      state.transactions = action.payload;
+      if (action.payload.length === 0) {
+        state.isMoreTransactions = false;
+      } else if (action.payload !== 'no value') {
+        state.page += 1;
+        state.isMoreTransactions = true;
+        state.transactions = [...state.transactions, ...action.payload];
+      }
     });
     builder.addCase(fetchTransactions.pending, (state) => {
       state.isSuccess = false;
@@ -105,10 +112,11 @@ const dashboardSlice = createSlice({
       state.isLoading = false;
       state.isError = action.payload;
     });
-    builder.addCase(addTransaction.fulfilled, (state) => {
+    builder.addCase(addTransaction.fulfilled, (state, action) => {
       state.isSuccess = true;
       state.isLoading = false;
       state.isError = null;
+      state.transactions = [action.payload, ...state.transactions];
     });
     builder.addCase(addTransaction.pending, (state) => {
       state.isSuccess = false;

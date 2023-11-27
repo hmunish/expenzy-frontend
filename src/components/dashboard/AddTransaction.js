@@ -1,7 +1,7 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect, useState } from 'react';
 import TopBar from '../common/TopBar';
-import { addTransaction, resetState, switchOnIsUpdated } from '../../redux/dashboard/dashboardSlice';
+import { addTransaction, resetState } from '../../redux/dashboard/dashboardSlice';
 import Notification from '../common/Notification';
 
 const AddTransaction = () => {
@@ -18,9 +18,7 @@ const AddTransaction = () => {
     const amount = transactionType === 'income' ? e.target.amount.value : -e.target.amount.value;
     const category = e.target.category.value;
     const description = e.target.description.value;
-
     dispatch(addTransaction({ amount, category, description }));
-    dispatch(switchOnIsUpdated());
   };
 
   return (

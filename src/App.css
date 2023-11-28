@@ -59,7 +59,7 @@ button.light {
   height: 100%;
 }
 
-.tx-100{
+.tx-100 {
   transform: translateX(100%);
 }
 
@@ -745,7 +745,7 @@ div.budget {
   justify-content: space-between;
 }
 
-#buy-premium{
+#buy-premium {
   width: 75%;
   padding: 15px;
   margin: auto;

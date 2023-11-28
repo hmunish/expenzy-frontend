@@ -34,7 +34,7 @@ export const fetchTotals = createAsyncThunk('dashboard/fetchTotals', async (_, t
 export const fetchTransactions = createAsyncThunk('dashboard/fetchTransactions', async (_, thunkAPI) => {
   try {
     const { dashboard } = thunkAPI.getState();
-    // Checking if transactions are updated if false returning with previous transactions
+    // Checking if transactions are updated if false returning with no value
     if (!dashboard.isUpdated) {
       return thunkAPI.fulfillWithValue('no value');
     }
@@ -116,7 +116,11 @@ const dashboardSlice = createSlice({
       state.isSuccess = true;
       state.isLoading = false;
       state.isError = null;
-      state.transactions = [action.payload, ...state.transactions];
+      state.page = 1;
+      state.isUpdated = true;
+      if (action.payload.amount < 0) state.totalExpense += Math.abs(action.payload.amount);
+      else state.totalIncome += +action.payload.amount;
+      state.transactions = [];
     });
     builder.addCase(addTransaction.pending, (state) => {
       state.isSuccess = false;

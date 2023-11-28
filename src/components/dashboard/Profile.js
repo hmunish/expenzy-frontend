@@ -1,5 +1,3 @@
-/*eslint-disable */
-
 import { useDispatch, useSelector } from 'react-redux';
 import Navigation from '../common/Navigation';
 import dpImg from '../assets/dp-big.png';
@@ -16,7 +14,7 @@ const Profile = () => {
   const handleSignout = () => {
     dispatch(resetState());
     dispatch(removeAuthorization());
-  }
+  };
   return (
     <section className="profile bg-light">
       <div className="profile-details">

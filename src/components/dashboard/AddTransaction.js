@@ -13,12 +13,13 @@ const AddTransaction = () => {
     dispatch(resetState());
   }, [dispatch]);
 
-  const handlerAddTransaction = (e) => {
+  const handlerAddTransaction = async (e) => {
     e.preventDefault();
     const amount = transactionType === 'income' ? e.target.amount.value : -e.target.amount.value;
     const category = e.target.category.value;
     const description = e.target.description.value;
-    dispatch(addTransaction({ amount, category, description }));
+    await dispatch(addTransaction({ amount, category, description }));
+    e.target.reset();
   };
 
   return (

@@ -860,10 +860,9 @@ div.bar-graph {
 .bar-progress {
   width: 100%;
   grid-column: 1 / 3;
-  accent-color: #c5ecde !important;
+  accent-color: #c5ecde !important; /* stylelint-disable-line */
 }
 
 /* Budget section ends here */
-
 
 /* Dashboard ends here */

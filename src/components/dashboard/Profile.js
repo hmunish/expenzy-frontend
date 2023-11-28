@@ -44,7 +44,13 @@ const Profile = () => {
             <p>Export</p>
           </div>
         </div>
-        <div className="profile-option" role="button" onClick={handleSignout}>
+        <div
+          className="profile-option"
+          role="link"
+          tabIndex={-1}
+          aria-hidden="true"
+          onClick={handleSignout}
+        >
           <div id="profile-option-wrp">
             <img src={signoutImg} alt="SignOut" />
             <p>Sign Out</p>

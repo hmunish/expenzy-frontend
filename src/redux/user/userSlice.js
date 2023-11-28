@@ -27,6 +27,26 @@ export const authorizeUser = createAsyncThunk(
   },
 );
 
+export const buyPremium = createAsyncThunk('user/buyPremium', async (_, thunkAPI) => {
+  try {
+    const response = await axios.post(`${API_URL}/premium/buy`);
+    if (response.status !== 201) throw new Error('Error buying premium');
+    return thunkAPI.fulfillWithValue(response.data);
+  } catch (error) {
+    return thunkAPI.rejectWithValue(error.response?.data.message || error.message);
+  }
+});
+
+export const updateOrderStatus = createAsyncThunk('user/updateOrderStatus', async ({ orderId, paymentId, status }, thunkAPI) => {
+  try {
+    const response = await axios.post(`${API_URL}/premium/update`, { orderId, paymentId, status });
+    if (response.status !== 200) throw new Error('Error updating order');
+    return thunkAPI.fulfillWithValue(response.data);
+  } catch (error) {
+    return thunkAPI.rejectWithValue(error.response?.data.message || error.message);
+  }
+});
+
 const userSlice = createSlice({
   name: 'userSlice',
   initialState,
@@ -49,6 +69,9 @@ const userSlice = createSlice({
       state.userAuthToken = getLocalStorageAuthToken();
       state.profile = {};
     },
+    switchOnPremium(state) {
+      state.profile.isPremium = true;
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(authorizeUser.fulfilled, (state, action) => {
@@ -68,5 +91,5 @@ const userSlice = createSlice({
   },
 });
 
-export const { updateAuthorization, removeAuthorization } = userSlice.actions;
+export const { updateAuthorization, removeAuthorization, switchOnPremium } = userSlice.actions;
 export default userSlice.reducer;

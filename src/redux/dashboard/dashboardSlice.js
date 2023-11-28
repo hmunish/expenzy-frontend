@@ -13,6 +13,10 @@ const initialState = {
   totalExpense: 0,
   page: 1,
   limit: 5,
+  incomeGroupTotal: [],
+  budgetIncomeTotal: 0,
+  expenseGroupTotal: [],
+  budgetExpenseTotal: 0,
 };
 
 export const fetchTotals = createAsyncThunk('dashboard/fetchTotals', async (_, thunkAPI) => {
@@ -56,6 +60,19 @@ export const addTransaction = createAsyncThunk('dashboard/addTransaction', async
   }
 });
 
+export const getBudget = createAsyncThunk('dashboard/getBudget', async (_, thunkAPI) => {
+  try {
+    // Validating if user is premium if false rejecting thunk with error
+    const { isPremium } = thunkAPI.getState().user.profile;
+    if (!isPremium) thunkAPI.rejectWithValue('Premium features not available');
+    const response = await axios.get(`${API_URL}/premium/features/budget`);
+    if (response.status !== 200) throw new Error('Error fetching budget');
+    return thunkAPI.fulfillWithValue(response.data);
+  } catch (error) {
+    return thunkAPI.rejectWithValue(error.response?.data.message || error.message);
+  }
+});
+
 const dashboardSlice = createSlice({
   name: 'dashboardSlice',
   initialState,
@@ -70,6 +87,16 @@ const dashboardSlice = createSlice({
     },
     switchOnIsUpdated: (state) => {
       state.isUpdated = true;
+    },
+    getBudgetIncomeTotal: (state) => {
+      let total = 0;
+      state.incomeGroupTotal.forEach((income) => { total += +income.total; });
+      state.budgetIncomeTotal = total;
+    },
+    getBudgetExpenseTotal: (state) => {
+      let total = 0;
+      state.expenseGroupTotal.forEach((expense) => { total += +expense.total; });
+      state.budgetExpenseTotal = total;
     },
     resetDashboard: () => initialState,
   },
@@ -133,10 +160,23 @@ const dashboardSlice = createSlice({
       state.isLoading = false;
       state.isError = action.payload;
     });
+    builder.addCase(getBudget.fulfilled, (state, action) => {
+      state.incomeGroupTotal = action.payload.income;
+      state.expenseGroupTotal = action.payload.expense;
+
+      let total = 0;
+      state.incomeGroupTotal.forEach((income) => { total += +income.total; });
+      state.budgetIncomeTotal = total;
+
+      total = 0;
+      state.expenseGroupTotal.forEach((expense) => { total += +expense.total; });
+      state.budgetExpenseTotal = total;
+    });
   },
 });
 
 export const {
-  resetState, switchOnIsUpdated, switchOffIsUpdated, resetDashboard,
+  resetState, switchOnIsUpdated, switchOffIsUpdated,
+  resetDashboard, getBudgetIncomeTotal, getBudgetExpenseTotal,
 } = dashboardSlice.actions;
 export default dashboardSlice.reducer;

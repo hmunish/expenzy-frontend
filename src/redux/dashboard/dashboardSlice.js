@@ -71,6 +71,7 @@ const dashboardSlice = createSlice({
     switchOnIsUpdated: (state) => {
       state.isUpdated = true;
     },
+    resetDashboard: () => initialState,
   },
   extraReducers: (builder) => {
     builder.addCase(fetchTotals.fulfilled, (state, action) => {
@@ -135,5 +136,7 @@ const dashboardSlice = createSlice({
   },
 });
 
-export const { resetState, switchOnIsUpdated, switchOffIsUpdated } = dashboardSlice.actions;
+export const {
+  resetState, switchOnIsUpdated, switchOffIsUpdated, resetDashboard,
+} = dashboardSlice.actions;
 export default dashboardSlice.reducer;

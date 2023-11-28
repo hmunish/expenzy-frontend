@@ -7,12 +7,14 @@ import settingsImg from '../assets/settings.png';
 import signoutImg from '../assets/logout.png';
 import { removeAuthorization } from '../../redux/user/userSlice';
 import { resetState } from '../../redux/onboard/onboardSlice';
+import { resetDashboard } from '../../redux/dashboard/dashboardSlice';
 
 const Profile = () => {
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const handleSignout = () => {
     dispatch(resetState());
+    dispatch(resetDashboard());
     dispatch(removeAuthorization());
   };
   return (

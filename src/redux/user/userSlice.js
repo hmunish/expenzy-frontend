@@ -42,9 +42,12 @@ const userSlice = createSlice({
     },
     removeAuthorization(state) {
       removeLocalStorageAuthToken();
-      state.isAuthorized = false;
-      state.userAuthToken = undefined;
       axios.defaults.headers.common.Authorization = undefined;
+      state.isLoading = false;
+      state.isError = null;
+      state.isAuthorized = false;
+      state.userAuthToken = getLocalStorageAuthToken();
+      state.profile = {};
     },
   },
   extraReducers: (builder) => {

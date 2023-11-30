@@ -14,6 +14,16 @@ const Budget = () => {
   const budgetTransactionsTotal = transactionType === 'income' ? dashboard.budgetIncomeTotal : dashboard.budgetExpenseTotal;
   const [Razorpay] = useRazorpay();
 
+  const budgetTransactionsGraph = [];
+
+  budgetTransactions.forEach((transaction) => {
+    budgetTransactionsGraph.push(transaction.total);
+  });
+
+  const piGraphStyle = {
+    backgroundImage: `conic-gradient(var(--bg-clr-6) ${((100 - Math.round((+budgetTransactionsGraph[0] / budgetTransactionsTotal) * 100)) || 100)}%, var(--bg-clr-7) ${(100 - Math.round((+budgetTransactionsGraph[0] / budgetTransactionsTotal) * 100)) || 100}%, var(--bg-clr-7) ${(100 - Math.round((+budgetTransactionsGraph[2] / +budgetTransactionsTotal) * 100)) || 100}%, var(--bg-clr-8) ${(100 - Math.round((+budgetTransactionsGraph[2] / budgetTransactionsTotal) * 100)) || 100}%)`,
+  };
+
   useEffect(() => {
     dispatch(getBudget());
   }, [dispatch]);
@@ -54,7 +64,9 @@ const Budget = () => {
       {user.profile.isPremium && (
       <div className="budget">
         <div className="budget-pi-graph">
-          <div id="pi-graph" />
+          <div id="pi-graph" style={piGraphStyle}>
+            <div id="pi-graph-overlay" />
+          </div>
         </div>
         <div className="budget-bar-graph">
           <div className="budget-bar-graph-toggle flx-ctr">
@@ -66,14 +78,14 @@ const Budget = () => {
           </div>
           <div className="bar-graph">
             {
-              budgetTransactions.map((transaction) => (
+              budgetTransactions.map((transaction, index) => (
                 <div className="bar" key={transaction.category}>
                   <div className="bar-tag">
-                    <div className="tag-circle" />
+                    <div className="tag-circle" data-index={index} />
                     <p className="tag-cat">{transaction.category}</p>
                   </div>
                   <p className="bar-amt">{transaction.total}</p>
-                  <progress className="bar-progress" value={Math.round((+transaction.total / budgetTransactionsTotal) * 100)} min="0" max="100" />
+                  <progress className="bar-progress" value={Math.round((+transaction.total / budgetTransactionsTotal) * 100)} min="0" max="100" data-index={index} />
                 </div>
               ))
             }

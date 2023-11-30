@@ -24,6 +24,9 @@
   --bg-clr-3: #00a86b;
   --bg-clr-4: #fd3c4a;
   --bg-clr-5: #d9d9d9;
+  --bg-clr-6: #fcac12;
+  --bg-clr-7: #7f3dff;
+  --bg-clr-8: #fd3c4a;
   --dark-clr-1: #212325;
   --dark-clr-2: #525252;
 }
@@ -773,8 +776,17 @@ div.budget-pi-graph {
 #pi-graph {
   width: 192px;
   height: 192px;
-  background-image: conic-gradient(orange 64%, blue 64%, blue 81%, black 81%);
   background-position: center;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#pi-graph-overlay {
+  width: 75%;
+  height: 75%;
+  background: #fff;
   border-radius: 50%;
 }
 
@@ -828,7 +840,7 @@ div.bar-graph {
   height: 67%;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
 }
 
@@ -864,6 +876,18 @@ div.bar-graph {
   border-radius: 50%;
 }
 
+.tag-circle[data-index="0"] {
+  background-color: var(--bg-clr-6) !important; /* stylelint-disable-line */
+}
+
+.tag-circle[data-index="1"] {
+  background-color: var(--bg-clr-7) !important; /* stylelint-disable-line */
+}
+
+.tag-circle[data-index="2"] {
+  background-color: var(--bg-clr-8) !important; /* stylelint-disable-line */
+}
+
 .bar-amt {
   font-size: 24px;
   font-weight: 600;
@@ -874,7 +898,18 @@ div.bar-graph {
 .bar-progress {
   width: 100%;
   grid-column: 1 / 3;
-  accent-color: #c5ecde !important; /* stylelint-disable-line */
+}
+
+.bar-progress[data-index="0"] {
+  accent-color: var(--bg-clr-6) !important; /* stylelint-disable-line */
+}
+
+.bar-progress[data-index="1"] {
+  accent-color: var(--bg-clr-7) !important; /* stylelint-disable-line */
+}
+
+.bar-progress[data-index="2"] {
+  accent-color: var(--bg-clr-8) !important; /* stylelint-disable-line */
 }
 
 /* Budget section ends here */
